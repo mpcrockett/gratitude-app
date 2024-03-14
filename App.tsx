@@ -10,20 +10,11 @@ import EmojiPicker from './components/EmojiPicker';
 import EmojiList from './components/EmojiList';
 import EmojiSticker from './components/EmojiSticker';
 import JournalEntryInput from './components/journalEntry';
-import {  useFonts, Oswald_500Medium } from '@expo-google-fonts/oswald';
-
 
 const placeholderImage = require('./assets/images/background-image.png');
 
 export default function App() {
-  //for using the expo fonts package
-  let [fontsLoaded] = useFonts({
-    Oswald_500Medium,
-  });
-
-  // if (!fontsLoaded) {
-  //   return null;
-  // }
+ 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
   const imageSource = selectedImage ? { uri: selectedImage } : placeholderImage;
@@ -71,29 +62,10 @@ export default function App() {
       <View style={styles.imageContainer}>
         <ImageViewer image={imageSource} />
         {pickedEmoji !== null && <EmojiSticker imageSize={40} stickerSource={pickedEmoji} /> }
-        <View>
-      <JournalEntryInput onEntrySubmit={handleJournalEntrySubmit} />
-    </View>
       </View>
-
-      {/* {showAppOptions ? (
-        <View style={styles.optionsContainer}>
-          <View style={styles.optionsRow}>
-            <IconButton icon='refresh' label='Reset' onPress={onReset} />
-            <CircleButton onPress={onAddSticker} />
-            <IconButton icon='save-alt' label='Save' onPress={onSaveImage} />
-          </View>
-        </View>
-      ) : (
-        <View style={styles.footerContainer}>
-        <Button theme={'primary'} label={'Choose a Photo'} onPress={pickImage} />
-        <Button label={'Use this Photo'} onPress={() => { setShowAppOptions(true) }} />
+      <View style={styles.entryContainer}>
+        <JournalEntryInput onEntrySubmit={handleJournalEntrySubmit} />
       </View>
-      )}
-      <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
-        <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
-      </EmojiPicker>
-      <StatusBar style="auto" /> */}
     </View>
   );
 }
@@ -108,6 +80,10 @@ const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
     paddingTop: 58,
+  },
+  entryContainer: {
+    flex: 1,
+    width: '100%'
   },
   image: {
     width: 320,

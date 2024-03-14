@@ -9,9 +9,15 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo-google-fonts/inter": "^0.2.3",
     "@expo-google-fonts/oswald": "^0.2.3",
     "@expo/vector-icons": "^14.0.0",
     "@expo/webpack-config": "~19.0.1",
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-brands-svg-icons": "^6.5.1",
+    "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-native-fontawesome": "^0.3.0",
     "@react-native-picker/picker": "^2.6.1",
     "expo": "^50.0.0",
     "expo-font": "~11.10.3",
@@ -22,6 +28,7 @@
     "react-native": "0.73.4",
     "react-native-gesture-handler": "~2.14.0",
     "react-native-reanimated": "~3.6.2",
+    "react-native-svg": "^15.1.0",
     "react-native-web": "~0.19.6"
   },
   "devDependencies": {
