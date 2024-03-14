@@ -9,11 +9,21 @@ import CircleButton from './components/CircleButton';
 import EmojiPicker from './components/EmojiPicker';
 import EmojiList from './components/EmojiList';
 import EmojiSticker from './components/EmojiSticker';
+import JournalEntryInput from './components/journalEntry';
+import {  useFonts, Oswald_500Medium } from '@expo-google-fonts/oswald';
 
 
 const placeholderImage = require('./assets/images/background-image.png');
 
 export default function App() {
+  //for using the expo fonts package
+  let [fontsLoaded] = useFonts({
+    Oswald_500Medium,
+  });
+
+  // if (!fontsLoaded) {
+  //   return null;
+  // }
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
   const imageSource = selectedImage ? { uri: selectedImage } : placeholderImage;
@@ -35,6 +45,11 @@ export default function App() {
   const onSaveImage = () => {
     
   }
+  const handleJournalEntrySubmit = (entryText) => {
+    console.log('Journal Entry Submitted:', entryText);
+    // Here you can handle the submitted text, such as saving it to state or sending it to a server
+  };
+
 
 
   const pickImage = async () => {
@@ -56,9 +71,12 @@ export default function App() {
       <View style={styles.imageContainer}>
         <ImageViewer image={imageSource} />
         {pickedEmoji !== null && <EmojiSticker imageSize={40} stickerSource={pickedEmoji} /> }
+        <View>
+      <JournalEntryInput onEntrySubmit={handleJournalEntrySubmit} />
+    </View>
       </View>
 
-      {showAppOptions ? (
+      {/* {showAppOptions ? (
         <View style={styles.optionsContainer}>
           <View style={styles.optionsRow}>
             <IconButton icon='refresh' label='Reset' onPress={onReset} />
@@ -75,7 +93,7 @@ export default function App() {
       <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
         <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
       </EmojiPicker>
-      <StatusBar style="auto" />
+      <StatusBar style="auto" /> */}
     </View>
   );
 }
@@ -83,7 +101,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#25292e',
+    backgroundColor: '#CFDBD5',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -107,5 +125,11 @@ const styles = StyleSheet.create({
   optionsRow: {
     alignItems: 'center',
     flexDirection: 'row'
+  },
+  subtitle: {
+    padding: 10,
+    fontFamily: 'Oswald_500Medium',
+    fontSize: 20,
+    textTransform: 'uppercase'
   }
 });
