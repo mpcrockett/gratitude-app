@@ -17,6 +17,9 @@ import {
 } from "@expo-google-fonts/inter";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons/faCaretDown";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { setPrompt, setEntry, createPost } from "../app/slices/postSlice";
+
 
 const JournalEntryInput = ({ onEntrySubmit }) => {
 	let [fontsLoaded] = useFonts({
@@ -29,6 +32,8 @@ const JournalEntryInput = ({ onEntrySubmit }) => {
 	const [entryText, setEntryText] = useState("");
 	const [showPicker, setShowPicker] = useState(false);
 
+	const dispatch = useAppDispatch();
+
 	const prompts = [
 		"List 6 things you're grateful for today.",
 		"Describe a time this week you had a 'glimmer moment'.",
@@ -37,10 +42,12 @@ const JournalEntryInput = ({ onEntrySubmit }) => {
 
 	const handleTextChange = (text) => {
 		setEntryText(text);
+		dispatch(setEntry(text));
 	};
 
 	const handleSubmit = () => {
-		onEntrySubmit(selectedPrompt, entryText);
+		// onEntrySubmit(selectedPrompt, entryText);
+		dispatch(createPost(entryText));
 		setEntryText(""); // Clear the input after submission
 		setSelectedPrompt(""); // Reset selected prompt
 		setShowPicker(false); // Close picker after selection
@@ -52,6 +59,7 @@ const JournalEntryInput = ({ onEntrySubmit }) => {
 
 	const handleSelect = (prompt) => {
 		setSelectedPrompt(prompt);
+		dispatch(setPrompt(prompt));
 		setShowPicker(false);
 	};
 
@@ -95,7 +103,7 @@ const JournalEntryInput = ({ onEntrySubmit }) => {
 				placeholder='Your journal entry'
 				style={styles.textInput}
 				value={entryText}
-				onChangeText={handleTextChange}
+				onChangeText={(text) => handleTextChange(text)}
 			/>
 			<Button title='Save Entry' onPress={handleSubmit} />
 		</View>
