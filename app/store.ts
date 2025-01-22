@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import postReducer from './slices/postSlice';
+import imageReducer from './slices/imageSlice';
 
 export const store = configureStore({
   reducer: {
     post: postReducer,
+    image: imageReducer,
   }
 });
 

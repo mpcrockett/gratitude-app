@@ -1,18 +1,26 @@
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import ImageViewer from './components/imageViewer';
 import * as ImagePicker from 'expo-image-picker';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import EmojiSticker from './components/EmojiSticker';
 import JournalEntryInput from './components/journalEntry';
+import { RootState } from './app/store';
+import { useDispatch } from 'react-redux';
+import { setSelectedUrl } from './app/slices/imageSlice';
 
 const placeholderImage = require('./assets/images/background-image.png');
 
 export default function Main() {
+  const dispatch = useDispatch();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [pickedEmoji, setPickedEmoji] = useState<null | NodeRequire>(null);
   const imageSource = selectedImage ? { uri: selectedImage } : placeholderImage;
+
+  useEffect(() => {
+    dispatch(setSelectedUrl(selectedImage));
+  }, [selectedImage, dispatch]);
 
   const onReset = () => {
     setShowAppOptions(false);
@@ -27,12 +35,12 @@ export default function Main() {
   };
 
   const onSaveImage = () => {
-    // Save logic here
+   
   };
 
   const handleJournalEntrySubmit = (entryText: any) => {
     console.log('Journal Entry Submitted:', entryText);
-    // Handle the submitted text, such as saving it to state or sending it to a server
+    
   };
 
   const pickImage = async () => {
@@ -52,7 +60,6 @@ export default function Main() {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        {/* Make the image tappable */}
         <Pressable onPress={pickImage}>
           <Image source={imageSource} style={styles.image} />
         </Pressable>
