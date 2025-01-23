@@ -20,6 +20,7 @@ export default function Main() {
 
   useEffect(() => {
     dispatch(setSelectedUrl(selectedImage));
+    console.log("set selected image dispatched");
   }, [selectedImage, dispatch]);
 
   const onReset = () => {
@@ -38,9 +39,8 @@ export default function Main() {
    
   };
 
-  const handleJournalEntrySubmit = (entryText: any) => {
-    console.log('Journal Entry Submitted:', entryText);
-    
+  const handleEntrySubmit = (selectedPrompt: string, entryText: string) => {
+    console.log(`Journal Entry Submitted: ${selectedPrompt}, ${entryText}`);
   };
 
   const pickImage = async () => {
@@ -66,7 +66,7 @@ export default function Main() {
         {pickedEmoji !== null && <EmojiSticker imageSize={40} stickerSource={pickedEmoji} />}
       </View>
       <View style={styles.entryContainer}>
-        <JournalEntryInput onEntrySubmit={handleJournalEntrySubmit} />
+        <JournalEntryInput onEntrySubmit={handleEntrySubmit} />
       </View>
     </View>
   );

@@ -46,7 +46,7 @@ const JournalEntryInput = ({ onEntrySubmit }) => {
 	};
 
 	const handleSubmit = () => {
-		// onEntrySubmit(selectedPrompt, entryText);
+		onEntrySubmit(selectedPrompt, entryText);
 		dispatch(createPost(entryText));
 		setEntryText(""); // Clear the input after submission
 		setSelectedPrompt(""); // Reset selected prompt
