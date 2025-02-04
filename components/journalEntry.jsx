@@ -1,25 +1,14 @@
-import React, { useState } from "react";
 import {
 	View,
 	StyleSheet,
-	Text,
 	TextInput,
-	Pressable,
-	Button,
-	Modal,
 } from "react-native";
-import { Picker } from "@react-native-picker/picker";
 import {
 	useFonts,
 	Inter_300Light,
 	Oswald_400Regular,
 	Inter_400Regular,
 } from "@expo-google-fonts/inter";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons/faCaretDown";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { setPrompt, setEntry, createPost } from "../app/slices/postSlice";
-
 
 const JournalEntryInput = ({ entryText, setEntryText, handleTextChange }) => {
 	let [fontsLoaded] = useFonts({
@@ -43,7 +32,7 @@ const JournalEntryInput = ({ entryText, setEntryText, handleTextChange }) => {
 
 const styles = StyleSheet.create({
 	container: {
-		padding: 20,
+		padding: 5,
 	},
 	prompt: {
 		fontFamily: "Inter_300Light",

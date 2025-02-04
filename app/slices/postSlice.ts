@@ -25,9 +25,12 @@ export const postSlice = createSlice({
 })
 
 export const createPost = createAsyncThunk('post/createPost', async (userEntry) => {
-  const response = await axios.post('http://localhost:3000/api/post', { post: userEntry});
-  console.log(response);
-  return response;
+  const response = await axios.get('http://localhost:3000/api/test');
+  // const response = await axios.post('http://localhost:3000/api/post', { post: userEntry});
+  return {
+    data: response.data,
+    status: response.status,
+  };
 })
 
 export const { setPrompt, setEntry } = postSlice.actions;

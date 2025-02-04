@@ -3,7 +3,7 @@ import ImageViewer from './imageViewer';
 import * as ImagePicker from 'expo-image-picker';
 import { useEffect, useState } from 'react';
 import JournalEntryInput from './journalEntry';
-import { RootState } from '../app/store';
+import { AppDispatch, RootState } from '../app/store';
 import { useDispatch } from 'react-redux';
 import { setSelectedUrl } from '../app/slices/imageSlice';
 import { setPrompt, setEntry, createPost } from "../app/slices/postSlice"
@@ -12,7 +12,7 @@ import PromptPicker from './promptPicker';
 const placeholderImage = require('../assets/images/background-image.png');
 
 const Entry = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedPrompt, setSelectedPrompt] = useState("");
   const [entryText, setEntryText] = useState("");
@@ -42,7 +42,7 @@ const Entry = () => {
 	};
 
   const handleEntrySubmit = () => {
-    // console.log(`Journal Entry Submitted: ${selectedPrompt}, ${entryText}, ${image}`);
+    dispatch(createPost());
     console.log(`pressed`);
   };
 

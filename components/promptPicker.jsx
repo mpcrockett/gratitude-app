@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
 	View,
 	StyleSheet,
 	Text,
-	TextInput,
 	Pressable,
-	Button,
 	Modal,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
@@ -18,8 +16,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons/faCaretDown";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { setPrompt, setEntry, createPost } from "../app/slices/postSlice";
-
 
 const PromptPicker = ({selectedPrompt, setSelectedPrompt, handleSelectPrompt}) => {
 	let [fontsLoaded] = useFonts({
